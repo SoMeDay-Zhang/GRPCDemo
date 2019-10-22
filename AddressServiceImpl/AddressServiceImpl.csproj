@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Address.Domain\Address.Domain.csproj" />
+    <ProjectReference Include="..\IAddressService\AddressService.csproj" />
+  </ItemGroup>
+
+</Project>

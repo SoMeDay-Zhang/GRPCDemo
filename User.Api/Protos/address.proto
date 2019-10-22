@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcAddress";
+
+service Addresses {
+	rpc CreateAddress (CreateAddressRequest) returns (CreateAddressResponse);
+	rpc RetrieveAddress(RetrieveAddressRequest) returns (RetrieveAddressResponse);
+}
+
+message CreateAddressRequest {
+	string Province = 1;
+	string City=2;
+	string County=3;
+}
+
+message CreateAddressResponse {
+	bool Succeed = 1;
+	string message=2;
+}
+
+message RetrieveAddressRequest{
+	string ID=1;
+}
+
+message RetrieveAddressResponse{
+	string ID=1;
+	string Province = 2;
+	string City=3;
+	string County=4;
+}
