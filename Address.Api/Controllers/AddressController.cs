@@ -42,7 +42,6 @@ namespace Address.Api.Controllers
         [HttpGet, UoW]
         public void CreateAddressAndProvince()
         {
-            using var ts = new TransactionScope();
             _provinceService.Create("四川", "1234");
             _addressService.CreateAddress(new AddressCreateDto
             {
@@ -50,7 +49,6 @@ namespace Address.Api.Controllers
                 Province = "四川省",
                 County = "武侯区"
             });
-            ts.Complete();
         }
     }
 }

@@ -37,13 +37,17 @@ namespace Utils
             try
             {
                 await _dbContext.SaveChangesAsync();
-
             }
             catch (DbUpdateConcurrencyException ex)
             {
                 ex.Entries.Single().Reload();
             }
 
+        }
+
+        public void Rollback()
+        {
+            _dbContext.Database.RollbackTransaction();
         }
 
         public virtual async Task BulkCommitAsync<T>(IList<T> entities) where T : Entity

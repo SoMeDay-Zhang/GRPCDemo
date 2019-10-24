@@ -22,6 +22,8 @@ namespace Utils
         /// </summary>
         Task CommitAsync();
 
+        void Rollback();
+
         Task BulkCommitAsync<T>(IList<T> entities) where T : Entity;
 
         void Commit();
