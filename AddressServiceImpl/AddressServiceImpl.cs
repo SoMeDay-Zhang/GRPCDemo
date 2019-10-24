@@ -1,6 +1,5 @@
 ﻿using System;
 using Address.Domain;
-using Address.Domain.IRepositories;
 using AddressDto;
 using AddressService;
 using Utils;
@@ -9,25 +8,28 @@ namespace AddressServiceImpl
 {
     public class AddressServiceImpl : IAddressService
     {
-        private readonly IAddressRepository _addressRepository;
-        private readonly IRepository<Address.Domain.Address> _repository;
         private readonly IRepository<Province> _provinceRepository;
+        private readonly IRepository<Address.Domain.Address> _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AddressServiceImpl(IAddressRepository addressRepository, IRepository<Address.Domain.Address> repository, IRepository<Province> provinceRepository)
+        public AddressServiceImpl(IRepository<Address.Domain.Address> repository,
+            IRepository<Province> provinceRepository, IUnitOfWork unitOfWork)
         {
-            _addressRepository = addressRepository;
             _repository = repository;
             _provinceRepository = provinceRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public void CreateAddress(AddressCreateDto addressCreate)
         {
-            _addressRepository.Create(new Address.Domain.Address
+            _unitOfWork.RegisterNew(new Address.Domain.Address
             {
                 City = addressCreate.City,
                 County = addressCreate.County,
                 Province = addressCreate.Province
             });
+            throw new Exception();
+            _unitOfWork.Commit();
         }
 
         public AddressDto.AddressDto Retrieve(Guid id)
@@ -51,7 +53,7 @@ namespace AddressServiceImpl
                 Name = province.Name,
                 ID = province.ID,
                 CreateTime = province.CreateTime,
-                UpdateTime = province.UpdateTime,
+                UpdateTime = province.UpdateTime
             };
         }
     }

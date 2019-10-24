@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Transactions;
 using AddressDto;
 using AddressService;
 using Microsoft.AspNetCore.Mvc;
+using ProvinceService;
+using Utils;
 
 namespace Address.Api.Controllers
 {
@@ -10,10 +13,12 @@ namespace Address.Api.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
+        private readonly IProvinceService _provinceService;
 
-        public AddressController(IAddressService addressService)
+        public AddressController(IAddressService addressService, IProvinceService provinceService)
         {
             _addressService = addressService;
+            _provinceService = provinceService;
         }
 
         [HttpPost]
@@ -32,6 +37,20 @@ namespace Address.Api.Controllers
         public ProvinceDto RetrieveProvince(Guid id)
         {
             return _addressService.RetrieveProvince(id);
+        }
+
+        [HttpGet, UoW]
+        public void CreateAddressAndProvince()
+        {
+            using var ts = new TransactionScope();
+            _provinceService.Create("四川", "1234");
+            _addressService.CreateAddress(new AddressCreateDto
+            {
+                City = "成都市",
+                Province = "四川省",
+                County = "武侯区"
+            });
+            ts.Complete();
         }
     }
 }

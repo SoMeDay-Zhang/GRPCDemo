@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProvinceService;
 using Utils;
 
 namespace Address.Api
@@ -29,8 +30,11 @@ namespace Address.Api
             services.AddDbContext<AddressContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("AddressContext")));
             services.AddScoped<IAddressRepository, AddressRepositoryImpl>();
+            services.AddTransient<IUnitOfWork, UnitOfWork<AddressContext>>();
             services.AddScoped<IAddressService, AddressServiceImpl.AddressServiceImpl>();
+            services.AddScoped<IProvinceService, ProvinceServiceImpl.ProvinceServiceImpl>();
             services.AddGrpc();
+            services.AddMvc(options => options.Filters.Add(typeof(TransactionActionFilter)));
             services.AddRepositories(new[] { "Address.Domain" }, typeof(AddressContext), ServiceLifetime.Transient);
         }
 
