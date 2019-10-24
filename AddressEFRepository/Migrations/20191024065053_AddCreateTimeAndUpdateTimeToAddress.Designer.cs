@@ -3,14 +3,16 @@ using System;
 using AddressEFRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AddressEFRepository.Migrations
 {
     [DbContext(typeof(AddressContext))]
-    partial class AddressContextModelSnapshot : ModelSnapshot
+    [Migration("20191024065053_AddCreateTimeAndUpdateTimeToAddress")]
+    partial class AddCreateTimeAndUpdateTimeToAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,33 +49,6 @@ namespace AddressEFRepository.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("Address.Domain.Province", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("varchar(30)")
-                        .HasMaxLength(30);
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(30)")
-                        .HasMaxLength(30);
-
-                    b.Property<DateTime>("UpdateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Province");
                 });
 #pragma warning restore 612, 618
         }

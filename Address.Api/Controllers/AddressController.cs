@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Address.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AddressController : ControllerBase
     {
@@ -26,6 +26,12 @@ namespace Address.Api.Controllers
         public AddressDto.AddressDto Retrieve(Guid id)
         {
             return _addressService.Retrieve(id);
+        }
+
+        [HttpGet]
+        public ProvinceDto RetrieveProvince(Guid id)
+        {
+            return _addressService.RetrieveProvince(id);
         }
     }
 }

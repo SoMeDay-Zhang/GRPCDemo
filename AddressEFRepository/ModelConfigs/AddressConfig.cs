@@ -11,6 +11,8 @@ namespace AddressEFRepository.ModelConfigs
             builder.Property(q => q.City).IsRequired().HasMaxLength(30);
             builder.Property(q => q.Province).IsRequired().HasMaxLength(30);
             builder.Property(q => q.County).IsRequired().HasMaxLength(30);
+            builder.Property(q => q.CreateTime).IsRequired();
+            builder.Property(q => q.UpdateTime).IsRequired();
         }
     }
 }

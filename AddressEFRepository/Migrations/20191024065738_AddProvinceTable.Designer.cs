@@ -3,14 +3,16 @@ using System;
 using AddressEFRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AddressEFRepository.Migrations
 {
     [DbContext(typeof(AddressContext))]
-    partial class AddressContextModelSnapshot : ModelSnapshot
+    [Migration("20191024065738_AddProvinceTable")]
+    partial class AddProvinceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

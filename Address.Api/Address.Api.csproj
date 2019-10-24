@@ -5,16 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Certs\aspnetapp.pfx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Certs\aspnetapp.pfx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.24.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
@@ -29,6 +19,7 @@
     <ProjectReference Include="..\AddressEFRepository\AddressEFRepository.csproj" />
     <ProjectReference Include="..\AddressServiceImpl\AddressServiceImpl.csproj" />
     <ProjectReference Include="..\IAddressService\AddressService.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\address.proto" />

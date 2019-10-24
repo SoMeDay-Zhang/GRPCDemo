@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Address.Domain\Address.Domain.csproj" />
     <ProjectReference Include="..\IAddressService\AddressService.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
 </Project>

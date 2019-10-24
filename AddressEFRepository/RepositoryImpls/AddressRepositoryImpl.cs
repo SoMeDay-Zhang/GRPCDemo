@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Linq;
 using Address.Domain.IRepositories;
+using Utils;
 
 namespace AddressEFRepository.RepositoryImpls
 {
     public sealed class AddressRepositoryImpl : IAddressRepository
     {
         private readonly AddressContext _addressContext;
+    
 
         public AddressRepositoryImpl(AddressContext addressContext)
         {
+            _addressContext = addressContext;
             _addressContext = addressContext;
         }
 

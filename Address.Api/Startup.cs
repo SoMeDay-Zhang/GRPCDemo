@@ -1,3 +1,4 @@
+using System;
 using Address.Domain.IRepositories;
 using AddressEFRepository;
 using AddressEFRepository.RepositoryImpls;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Utils;
 
 namespace Address.Api
 {
@@ -29,6 +31,7 @@ namespace Address.Api
             services.AddScoped<IAddressRepository, AddressRepositoryImpl>();
             services.AddScoped<IAddressService, AddressServiceImpl.AddressServiceImpl>();
             services.AddGrpc();
+            services.AddRepositories(new[] { "Address.Domain" }, typeof(AddressContext), ServiceLifetime.Transient);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

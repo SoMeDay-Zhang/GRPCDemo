@@ -22,8 +22,6 @@ namespace Address.Api
                         options.Listen(IPAddress.Any, 5001, listenOptions =>
                         {
                             listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps("Certs/aspnetapp.pfx",
-                                "123456");
                         });
                     });
                     webBuilder.UseStartup<Startup>();
