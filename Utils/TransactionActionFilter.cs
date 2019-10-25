@@ -8,13 +8,6 @@ namespace Utils
 {
     public sealed class TransactionActionFilter : IAsyncActionFilter
     {
-        //private readonly IUnitOfWork _unitOfWork;
-
-        //public TransactionActionFilter(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //}
-
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (!(context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor))
@@ -26,13 +19,16 @@ namespace Utils
             var actionUoWAttrs = controllerActionDescriptor.MethodInfo.GetCustomAttribute<UoWAttribute>();
             if (controllerUoWAttrs != null || actionUoWAttrs != null)
             {
-                //using var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+                using var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
                 ActionExecutedContext result = await next();
-                //if (result.Exception != null || !result.ExceptionHandled)
-                //{
-                //    _unitOfWork.Rollback();
-                //}
-                //ts.Complete();
+                if (result.Exception != null || !result.ExceptionHandled)
+                {
+                    ts.Dispose();
+                }
+                else
+                {
+                    ts.Complete();
+                }
             }
             else
             {

@@ -46,7 +46,6 @@ namespace Address.Api.Controllers
         [HttpGet,UoW]
         public async Task CreateAddressAndProvince()
         {
-            using var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             await _provinceService.CreateAsync("四川", "1234");
             await _cityService.CreateAsync("成都市", "1232134");
             await _addressService.CreateAddressAsync(new AddressCreateDto
@@ -55,7 +54,6 @@ namespace Address.Api.Controllers
                 Province = "四川省",
                 County = "武侯区"
             });
-            ts.Complete();
         }
     }
 }
