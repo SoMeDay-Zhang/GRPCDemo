@@ -31,7 +31,7 @@ namespace AddressServiceImpl
                 Province = addressCreate.Province
             });
             await _unitOfWork.CommitAsync();
-            throw new Exception();
+            //throw new Exception();
         }
 
         public async Task<AddressDto.AddressDto> RetrieveAsync(Guid id)

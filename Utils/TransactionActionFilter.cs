@@ -21,13 +21,13 @@ namespace Utils
             {
                 using var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
                 ActionExecutedContext result = await next();
-                if (result.Exception != null || !result.ExceptionHandled)
+                if (result.Exception == null || result.ExceptionHandled)
                 {
-                    ts.Dispose();
+                    ts.Complete();
                 }
                 else
                 {
-                    ts.Complete();
+                    ts.Dispose();
                 }
             }
             else
