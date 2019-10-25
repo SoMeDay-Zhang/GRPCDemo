@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-    /// <inheritdoc />
     /// <summary>
     /// Unit Of Work Pattern
     /// </summary>

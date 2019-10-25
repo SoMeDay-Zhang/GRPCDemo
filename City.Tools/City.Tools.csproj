@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Address.Domain\Address.Domain.csproj" />
-    <ProjectReference Include="..\Address.Tools\Address.Tools.csproj" />
-    <ProjectReference Include="..\ProvinceService\ProvinceService.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 

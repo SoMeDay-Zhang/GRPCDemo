@@ -3,8 +3,8 @@
 option csharp_namespace = "GrpcAddress";
 
 service Addresses {
-	rpc CreateAddress (CreateAddressRequest) returns (CreateAddressResponse);
-	rpc RetrieveAddress(RetrieveAddressRequest) returns (RetrieveAddressResponse);
+	rpc CreateAddressAsync (CreateAddressRequest) returns (CreateAddressResponse);
+	rpc RetrieveAddressAsync(RetrieveAddressRequest) returns (RetrieveAddressResponse);
 }
 
 message CreateAddressRequest {

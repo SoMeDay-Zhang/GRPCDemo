@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Address.Domain;
+using Address.Tools;
 using AddressDto;
 using AddressService;
 using Utils;
@@ -10,17 +12,17 @@ namespace AddressServiceImpl
     {
         private readonly IRepository<Province> _provinceRepository;
         private readonly IRepository<Address.Domain.Address> _repository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IAddressUnitOfWork _unitOfWork;
 
         public AddressServiceImpl(IRepository<Address.Domain.Address> repository,
-            IRepository<Province> provinceRepository, IUnitOfWork unitOfWork)
+            IRepository<Province> provinceRepository, IAddressUnitOfWork unitOfWork)
         {
             _repository = repository;
             _provinceRepository = provinceRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public void CreateAddress(AddressCreateDto addressCreate)
+        public async Task CreateAddressAsync(AddressCreateDto addressCreate)
         {
             _unitOfWork.RegisterNew(new Address.Domain.Address
             {
@@ -28,13 +30,13 @@ namespace AddressServiceImpl
                 County = addressCreate.County,
                 Province = addressCreate.Province
             });
+            await _unitOfWork.CommitAsync();
             throw new Exception();
-            _unitOfWork.Commit();
         }
 
-        public AddressDto.AddressDto Retrieve(Guid id)
+        public async Task<AddressDto.AddressDto> RetrieveAsync(Guid id)
         {
-            Address.Domain.Address address = _repository.Retrieve(id);
+            Address.Domain.Address address = await _repository.RetrieveAsync(id);
             return new AddressDto.AddressDto
             {
                 City = address.City,
@@ -44,9 +46,9 @@ namespace AddressServiceImpl
             };
         }
 
-        public ProvinceDto RetrieveProvince(Guid id)
+        public async Task<ProvinceDto> RetrieveProvinceAsync(Guid id)
         {
-            Province province = _provinceRepository.Retrieve(id);
+            Province province = await _provinceRepository.RetrieveAsync(id);
             return new ProvinceDto
             {
                 Code = province.Code,

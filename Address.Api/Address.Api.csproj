@@ -18,6 +18,9 @@
   <ItemGroup>
     <ProjectReference Include="..\AddressEFRepository\AddressEFRepository.csproj" />
     <ProjectReference Include="..\AddressServiceImpl\AddressServiceImpl.csproj" />
+    <ProjectReference Include="..\City.EFRepository\City.EFRepository.csproj" />
+    <ProjectReference Include="..\CityServiceImpl\CityServiceImpl.csproj" />
+    <ProjectReference Include="..\CityService\CityService.csproj" />
     <ProjectReference Include="..\IAddressService\AddressService.csproj" />
     <ProjectReference Include="..\ProvinceServiceImpl\ProvinceServiceImpl.csproj" />
     <ProjectReference Include="..\ProvinceService\ProvinceService.csproj" />

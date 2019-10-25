@@ -1,26 +1,27 @@
-﻿using Address.Domain;
+﻿using System.Threading.Tasks;
+using Address.Domain;
+using Address.Tools;
 using ProvinceService;
-using Utils;
 
 namespace ProvinceServiceImpl
 {
     public sealed class ProvinceServiceImpl : IProvinceService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IAddressUnitOfWork _unitOfWork;
 
-        public ProvinceServiceImpl(IUnitOfWork unitOfWork)
+        public ProvinceServiceImpl(IAddressUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public void Create(string name, string code)
+        public async Task CreateAsync(string name, string code)
         {
             _unitOfWork.RegisterNew(new Province
             {
                 Name = name,
                 Code = code
             });
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

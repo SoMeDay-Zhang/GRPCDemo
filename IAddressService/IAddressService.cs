@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AddressDto;
 
 namespace AddressService
@@ -12,20 +13,20 @@ namespace AddressService
         /// 地址创建传输模型
         /// </summary>
         /// <param name="addressCreate"></param>
-        void CreateAddress(AddressCreateDto addressCreate);
+        Task CreateAddressAsync(AddressCreateDto addressCreate);
 
         /// <summary>
         /// 检索地址
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        AddressDto.AddressDto Retrieve(Guid id);
+        Task<AddressDto.AddressDto> RetrieveAsync(Guid id);
 
         /// <summary>
         /// 获取检索省
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ProvinceDto RetrieveProvince(Guid id);
+        Task<ProvinceDto> RetrieveProvinceAsync(Guid id);
     }
 }

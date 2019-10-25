@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Transactions;
 using AddressDto;
 using AddressService;
+using CityService;
 using Microsoft.AspNetCore.Mvc;
 using ProvinceService;
 using Utils;
@@ -14,41 +16,46 @@ namespace Address.Api.Controllers
     {
         private readonly IAddressService _addressService;
         private readonly IProvinceService _provinceService;
+        private readonly ICityService _cityService;
 
-        public AddressController(IAddressService addressService, IProvinceService provinceService)
+        public AddressController(IAddressService addressService, IProvinceService provinceService, ICityService cityService)
         {
             _addressService = addressService;
             _provinceService = provinceService;
+            _cityService = cityService;
         }
 
         [HttpPost]
-        public void Add(AddressCreateDto createDto)
+        public async Task Add(AddressCreateDto createDto)
         {
-            _addressService.CreateAddress(createDto);
+            await _addressService.CreateAddressAsync(createDto);
         }
 
         [HttpGet]
-        public AddressDto.AddressDto Retrieve(Guid id)
+        public async Task<AddressDto.AddressDto> Retrieve(Guid id)
         {
-            return _addressService.Retrieve(id);
+            return await _addressService.RetrieveAsync(id);
         }
 
         [HttpGet]
-        public ProvinceDto RetrieveProvince(Guid id)
+        public async Task<ProvinceDto> RetrieveProvince(Guid id)
         {
-            return _addressService.RetrieveProvince(id);
+            return await _addressService.RetrieveProvinceAsync(id);
         }
 
-        [HttpGet, UoW]
-        public void CreateAddressAndProvince()
+        [HttpGet,UoW]
+        public async Task CreateAddressAndProvince()
         {
-            _provinceService.Create("四川", "1234");
-            _addressService.CreateAddress(new AddressCreateDto
+            using var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            await _provinceService.CreateAsync("四川", "1234");
+            await _cityService.CreateAsync("成都市", "1232134");
+            await _addressService.CreateAddressAsync(new AddressCreateDto
             {
                 City = "成都市",
                 Province = "四川省",
                 County = "武侯区"
             });
+            ts.Complete();
         }
     }
 }

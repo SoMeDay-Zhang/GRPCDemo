@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\City.Domain\City.Domain.csproj" />
+    <ProjectReference Include="..\City.Tools\City.Tools.csproj" />
+    <ProjectReference Include="..\CityService\CityService.csproj" />
+  </ItemGroup>
+
+</Project>

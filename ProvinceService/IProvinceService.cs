@@ -1,7 +1,9 @@
-﻿namespace ProvinceService
+﻿using System.Threading.Tasks;
+
+namespace ProvinceService
 {
     public interface IProvinceService
     {
-        void Create(string name, string code);
+        Task CreateAsync(string name, string code);
     }
 }
