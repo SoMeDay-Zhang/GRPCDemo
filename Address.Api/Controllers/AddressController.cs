@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Transactions;
 using AddressDto;
 using AddressService;
 using CityService;
@@ -10,13 +10,12 @@ using Utils;
 
 namespace Address.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
+    [Route("api/[controller]/[action]"), ApiController]
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
-        private readonly IProvinceService _provinceService;
         private readonly ICityService _cityService;
+        private readonly IProvinceService _provinceService;
 
         public AddressController(IAddressService addressService, IProvinceService provinceService, ICityService cityService)
         {
@@ -37,13 +36,23 @@ namespace Address.Api.Controllers
             return await _addressService.RetrieveAsync(id);
         }
 
+        /// <summary>
+        /// 获取所有地址
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IList<AddressDto.AddressDto>> GetAll()
+        {
+            return await _addressService.GetAllAddressesAsync();
+        }
+
         [HttpGet]
         public async Task<ProvinceDto> RetrieveProvince(Guid id)
         {
             return await _addressService.RetrieveProvinceAsync(id);
         }
 
-        [HttpGet,UoW]
+        [HttpGet, UoW]
         public async Task CreateAddressAndProvince()
         {
             await _provinceService.CreateAsync("四川", "1234");

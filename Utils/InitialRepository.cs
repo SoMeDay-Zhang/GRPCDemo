@@ -8,16 +8,15 @@ namespace Utils
 {
     public static class InitialRepository
     {
-        public static void AddRepositories(this IServiceCollection services, string[] path, Type dbContextType,
-            ServiceLifetime serviceLifetime)
+        public static void AddRepositories(this IServiceCollection services, string[] path, Type dbContextType, ServiceLifetime serviceLifetime)
         {
             var classWhereBaseTypeNotNull = new List<Type>();
             foreach (string item in path)
-                classWhereBaseTypeNotNull.AddRange(Assembly.Load(item).GetTypes()
-                    .Where(q => q.BaseType != null && !q.IsAbstract && !q.IsInterface));
+            {
+                classWhereBaseTypeNotNull.AddRange(Assembly.Load(item).GetTypes().Where(q => q.BaseType != null && !q.IsAbstract && !q.IsInterface));
+            }
 
-            IEnumerable<Type> entities =
-                classWhereBaseTypeNotNull.Where(q => q.BaseType.FullName.Equals(typeof(Entity).FullName));
+            IEnumerable<Type> entities = classWhereBaseTypeNotNull.Where(q => q.BaseType.FullName.Equals(typeof(Entity).FullName));
             foreach (Type item in entities)
             {
                 Type repositoryType = typeof(IRepository<>).MakeGenericType(item);

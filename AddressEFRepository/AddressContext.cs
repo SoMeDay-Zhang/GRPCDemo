@@ -8,8 +8,7 @@ namespace AddressEFRepository
 {
     public sealed class AddressContext : DbContext
     {
-        public AddressContext(DbContextOptions<AddressContext> options)
-            : base(options)
+        public AddressContext(DbContextOptions<AddressContext> options) : base(options)
         {
         }
 
@@ -17,8 +16,7 @@ namespace AddressEFRepository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            IEnumerable<Type> typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(q => q.GetInterface(typeof(IEntityTypeConfiguration<>).FullName) != null);
+            IEnumerable<Type> typesToRegister = Assembly.GetExecutingAssembly().GetTypes().Where(q => q.GetInterface(typeof(IEntityTypeConfiguration<>).FullName) != null);
 
             foreach (Type type in typesToRegister)
             {
