@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Transactions;
 using GrpcAddress;
 using Microsoft.AspNetCore.Mvc;
 using User.Api.Models;
 
 namespace User.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
+    [Route("api/[controller]/[action]"), ApiController]
     public class AddressController : ControllerBase
     {
         private readonly Addresses.AddressesClient _addressesClient;
@@ -26,9 +24,9 @@ namespace User.Api.Controllers
         /// </summary>
         /// <param name="createModel"></param>
         [HttpPost]
-        public async Task Create(AddressCreateModel createModel)
+        public void Create(AddressCreateModel createModel)
         {
-            await _addressesClient.CreateAddressAsync(new CreateAddressRequest
+            _addressesClient.CreateAddressAsync(new CreateAddressRequest
             {
                 Province = createModel.Province,
                 City = createModel.City,
@@ -51,11 +49,11 @@ namespace User.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<AddressDto.AddressDto> Retrieve(Guid id)
+        public AddressDto.AddressDto Retrieve(Guid id)
         {
             try
             {
-                RetrieveAddressResponse result = await _addressesClient.RetrieveAddressAsync(new RetrieveAddressRequest
+                RetrieveAddressResponse result = _addressesClient.RetrieveAddressAsync(new RetrieveAddressRequest
                 {
                     ID = id.ToString()
                 });
@@ -66,14 +64,12 @@ namespace User.Api.Controllers
                     Province = result.Province,
                     County = result.County
                 };
-
             }
             catch (Exception ex)
             {
                 Trace.WriteLine(ex.Message);
                 return null;
             }
-
         }
     }
 }
