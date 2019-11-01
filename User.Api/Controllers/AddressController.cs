@@ -7,7 +7,7 @@ using User.Api.Models;
 
 namespace User.Api.Controllers
 {
-    [Route("api/[controller]/[action]"), ApiController]
+    [Route("api/[controller]"), ApiController]
     public class AddressController : ControllerBase
     {
         private readonly Addresses.AddressesClient _addressesClient;

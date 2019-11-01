@@ -19,9 +19,9 @@ namespace Address.Api
                 {
                     webBuilder.ConfigureKestrel(options =>
                     {
-                        options.Listen(IPAddress.Any, 5001, listenOptions =>
+                        options.Listen(IPAddress.Loopback, 5000, listenOptions =>
                         {
-                            listenOptions.Protocols = HttpProtocols.Http2;
+                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
                         });
                     });
                     webBuilder.UseStartup<Startup>();
