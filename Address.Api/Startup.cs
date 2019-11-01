@@ -29,6 +29,8 @@ namespace Address.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public virtual void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
             services.AddControllers();
             services.AddDbContextPool<AddressContext>(options => options.UseMySql(Configuration.GetConnectionString("AddressContext")));
             services.AddDbContextPool<CityContext>(options => options.UseMySql(Configuration.GetConnectionString("AddressContext")));
@@ -40,7 +42,7 @@ namespace Address.Api
             services.AddTransient<ICityService, CityServiceImpl.CityServiceImpl>();
             services.AddGrpc();
             services.AddMvc(options => options.Filters.Add(typeof(TransactionActionFilter)));
-            services.AddRepositories(new[] { "Address.Domain", "City.Domain" }, typeof(AddressContext), ServiceLifetime.Transient);
+            services.AddRepositories(new[] {"Address.Domain", "City.Domain"}, typeof(AddressContext), ServiceLifetime.Transient);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +53,8 @@ namespace Address.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseCors();
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

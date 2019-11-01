@@ -18,10 +18,12 @@ namespace Address.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.ConfigureKestrel(options =>
-                    {
-                        options.Listen(IPAddress.Loopback, 5000, listenOptions =>
+                    { 
+                        options.Listen(IPAddress.Any, 5001, listenOptions =>
                         {
-                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                            listenOptions.Protocols = HttpProtocols.Http2;
+                            listenOptions.UseHttps("Certs/addressservicecert.pfx",
+                                "123456");
                         });
                     });
                     webBuilder.UseStartup<Startup>();
