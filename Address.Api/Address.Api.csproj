@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>36215f66-7242-4eaf-8b51-8204e90b675a</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
@@ -29,13 +28,15 @@
     <ProjectReference Include="..\ProvinceService\ProvinceService.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <Protobuf Include="Protos\address.proto" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Update="Dockerfile">
+    <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
 </Project>
