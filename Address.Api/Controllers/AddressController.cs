@@ -64,5 +64,18 @@ namespace Address.Api.Controllers
                 County = "武侯区"
             });
         }
+
+        [HttpGet]
+        public ProvinceDto GetProvince()
+        {
+            return new ProvinceDto
+            {
+                Code = "123123",
+                CreateTime = DateTime.Now,
+                ID = Guid.NewGuid(),
+                Name = "云南省",
+                UpdateTime = DateTime.Now
+            };
+        }
     }
 }
