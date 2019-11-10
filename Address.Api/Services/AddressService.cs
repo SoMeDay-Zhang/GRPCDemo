@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using AddressDto;
 using AddressService;
@@ -43,6 +44,18 @@ namespace Address.Api.Services
                 City = addressDto.City,
                 County = addressDto.County
             };
+        }
+
+        public override Task<RetrieveProvinceResponse> RetrieveProvince(RetrieveProvinceReqeust request, ServerCallContext context)
+        {
+            return Task.FromResult(new RetrieveProvinceResponse
+            {
+                Code = "123123",
+                CreateTime = DateTime.Now.ToString(CultureInfo.InvariantCulture),
+                ID = Guid.NewGuid().ToString(),
+                Name = "云南省",
+                UpdateTime = DateTime.Now.ToString(CultureInfo.InvariantCulture)
+            });
         }
     }
 }
