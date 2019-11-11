@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  user.api:
+    image: ${DOCKER_REGISTRY-}userapi
+    build:
+      context: .
+      dockerfile: User.Api/Dockerfile
+
+  address.api:
+    image: ${DOCKER_REGISTRY-}addressapi
+    ports: 
+      - "8900:80"
+    build:
+      context: .
+      dockerfile: Address.Api/Dockerfile
