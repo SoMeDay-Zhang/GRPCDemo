@@ -5,6 +5,7 @@ option csharp_namespace = "GrpcAddress";
 service Addresses {
 	rpc CreateAddressAsync (CreateAddressRequest) returns (CreateAddressResponse);
 	rpc RetrieveAddressAsync(RetrieveAddressRequest) returns (RetrieveAddressResponse);
+	rpc RetrieveProvince(RetrieveProvinceReqeust) returns(RetrieveProvinceResponse);
 }
 
 message CreateAddressRequest {
@@ -28,3 +29,16 @@ message RetrieveAddressResponse{
 	string City=3;
 	string County=4;
 }
+
+message RetrieveProvinceReqeust{
+
+}
+
+message RetrieveProvinceResponse{
+	string Code =1;
+	string CreateTime=2 ;
+	string ID =3;
+	string Name =4;
+	string UpdateTime = 5;
+}
+
