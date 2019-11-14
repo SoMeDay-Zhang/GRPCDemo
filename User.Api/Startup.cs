@@ -21,10 +21,10 @@ namespace User.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IConfigurationSection addressApiUriSection = Configuration.GetSection("AddressApiURI");
             services.AddControllers();
-            services.AddDbContext<WeatherForecastDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("AddressContext")));
-            services.AddGrpcClient<Addresses.AddressesClient>(o => { o.Address = new Uri("https://localhost:5001"); });
+            services.AddDbContext<WeatherForecastDbContext>(options => options.UseMySql(Configuration.GetSection("MySqlConnectionString").Value));
+            services.AddGrpcClient<Addresses.AddressesClient>(o => { o.Address = new Uri(addressApiUriSection.Value); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

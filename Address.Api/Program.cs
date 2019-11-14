@@ -1,6 +1,6 @@
-using System.Net;
+using Com.Ctrip.Framework.Apollo;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Address.Api
@@ -15,18 +15,12 @@ namespace Address.Api
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureAppConfiguration(builder =>
                 {
-                    //webBuilder.ConfigureKestrel(options =>
-                    //{
-                    //    options.Listen(IPAddress.Any, 5000);
-                    //    options.Listen(IPAddress.Any, 5001, listenOptions =>
-                    //    {
-                    //        listenOptions.Protocols = HttpProtocols.Http2;
-                    //    });
-                    //});
-                    webBuilder.UseStartup<Startup>();
-                });
+                    var apollo = builder.Build().GetSection("apollo").Get<ApolloOptions>();
+                    builder.AddApollo(apollo).AddDefault();
+                })
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }
     }
 }
