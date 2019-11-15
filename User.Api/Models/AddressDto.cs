@@ -2,6 +2,9 @@
 
 namespace User.Api.Models
 {
+    /// <summary>
+    /// 地址传输模型
+    /// </summary>
     public sealed class AddressDto
     {
         public Guid ID { get; set; }

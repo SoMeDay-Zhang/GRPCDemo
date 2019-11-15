@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using GrpcAddress;
 using Microsoft.AspNetCore.Mvc;
 using User.Api.Models;
 
 namespace User.Api.Controllers
 {
-    [Route("api/[controller]"), ApiController]
+    [Route("api/[controller]/[action]"), ApiController]
     public class AddressController : ControllerBase
     {
         private readonly Addresses.AddressesClient _addressesClient;
@@ -49,7 +48,7 @@ namespace User.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public AddressDto.AddressDto Retrieve(Guid id)
+        public AddressDto Retrieve(Guid id)
         {
             try
             {
@@ -57,7 +56,7 @@ namespace User.Api.Controllers
                 {
                     ID = id.ToString()
                 });
-                return new AddressDto.AddressDto
+                return new AddressDto
                 {
                     ID = new Guid(result.ID),
                     City = result.City,
@@ -70,6 +69,24 @@ namespace User.Api.Controllers
                 Trace.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 获取省
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ProvinceDto GetProvince()
+        {
+            RetrieveProvinceResponse response = _addressesClient.RetrieveProvince(new RetrieveProvinceReqeust());
+            return new ProvinceDto
+            {
+                ID = new Guid(response.ID),
+                Code = response.Code,
+                CreateTime = response.CreateTime,
+                Name = response.Name,
+                UpdateTime = response.UpdateTime
+            };
         }
     }
 }

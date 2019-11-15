@@ -31,9 +31,10 @@ namespace Address.Api
         {
             services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
+            string connectionString = Configuration.GetSection("MySqlConnectionString").Value;
             services.AddControllers();
-            services.AddDbContextPool<AddressContext>(options => options.UseMySql(Configuration.GetConnectionString("AddressContext")));
-            services.AddDbContextPool<CityContext>(options => options.UseMySql(Configuration.GetConnectionString("AddressContext")));
+            services.AddDbContextPool<AddressContext>(options => options.UseMySql(connectionString));
+            services.AddDbContextPool<CityContext>(options => options.UseMySql(connectionString));
             services.AddTransient<IAddressRepository, AddressRepositoryImpl>();
             services.AddTransient<IAddressUnitOfWork, AddressUnitOfWork<AddressContext>>();
             services.AddTransient<ICityUnitOfWork, CityUnitOfWork<CityContext>>();
@@ -42,7 +43,7 @@ namespace Address.Api
             services.AddTransient<ICityService, CityServiceImpl.CityServiceImpl>();
             services.AddGrpc();
             services.AddMvc(options => options.Filters.Add(typeof(TransactionActionFilter)));
-            services.AddRepositories(new[] {"Address.Domain", "City.Domain"}, typeof(AddressContext), ServiceLifetime.Transient);
+            services.AddRepositories(new[] { "Address.Domain", "City.Domain" }, typeof(AddressContext), ServiceLifetime.Transient);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -22,19 +22,20 @@ namespace Address.UnitTest
             DbContextOptions<AddressContext> options = new DbContextOptionsBuilder<AddressContext>().UseInMemoryDatabase("Add_Address_Database").Options;
             var addressContext = new AddressContext(options);
 
-            var createAddressStub = new AddressCreateDto
+            var createAddress = new AddressCreateDto
             {
                 City = "昆明",
                 County = "五华区",
                 Province = "云南省"
             };
-            var addressRepositoryMock = new Mock<IRepository<Domain.Address>>();
-            var provinceRepositoryMock = new Mock<IRepository<Province>>();
+            var stubAddressRepository = new Mock<IRepository<Domain.Address>>();
+            var stubProvinceRepository = new Mock<IRepository<Province>>();
             var addressUnitOfWork = new AddressUnitOfWork<AddressContext>(addressContext);
 
-            var addressServiceMock = new AddressServiceImpl.AddressServiceImpl(addressRepositoryMock.Object, provinceRepositoryMock.Object, addressUnitOfWork);
-            await addressServiceMock.CreateAddressAsync(createAddressStub);
-            Assert.Equal(1, await addressContext.Addresses.CountAsync());
+            var stubAddressService = new AddressServiceImpl.AddressServiceImpl(stubAddressRepository.Object, stubProvinceRepository.Object, addressUnitOfWork);
+            await stubAddressService.CreateAddressAsync(createAddress);
+            int addressAmountActual = await addressContext.Addresses.CountAsync();
+            Assert.Equal(1, addressAmountActual);
         }
 
         /// <summary>
@@ -51,13 +52,13 @@ namespace Address.UnitTest
                 Province = "云南省"
             };
 
-            var addressRepositoryMock = new Mock<IRepository<Domain.Address>>();
-            addressRepositoryMock.Setup(q => q.RetrieveAsync(address.ID)).ReturnsAsync(address);
+            var stubAddressRepository = new Mock<IRepository<Domain.Address>>();
+            stubAddressRepository.Setup(q => q.RetrieveAsync(address.ID)).ReturnsAsync(address);
 
-            var provinceRepositoryMock = new Mock<IRepository<Province>>();
-            var addressUnitOfWorkMock = new Mock<IAddressUnitOfWork>();
+            var stubProvinceRepository = new Mock<IRepository<Province>>();
+            var stubAddressUnitOfWork = new Mock<IAddressUnitOfWork>();
 
-            var addressServiceMock = new AddressServiceImpl.AddressServiceImpl(addressRepositoryMock.Object, provinceRepositoryMock.Object, addressUnitOfWorkMock.Object);
+            var addressServiceMock = new AddressServiceImpl.AddressServiceImpl(stubAddressRepository.Object, stubProvinceRepository.Object, stubAddressUnitOfWork.Object);
             AddressDto.AddressDto addressDto = await addressServiceMock.RetrieveAsync(address.ID);
             Assert.Equal(address.ID, addressDto.ID);
             Assert.Equal(address.City, addressDto.City);
