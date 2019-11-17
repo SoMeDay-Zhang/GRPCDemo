@@ -49,17 +49,17 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{F7DB7DC8-3AE2-4BB8-AFFF-FBFDD2802189}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{FA61EF3E-599A-4C72-8946-A46BBB89188D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{1CC2FA26-1EB5-4082-BF50-E2F8D188B3FC}"
 	ProjectSection(SolutionItems) = preProject
-		..\OneDrive\文档\微加\单元测试与集成测试\images\createintegrationtest.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\createintegrationtest.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\integrationmanager.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\integrationmanager.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\integrationmanagerrun.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\integrationmanagerrun.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\integrationmanagerrunresult.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\integrationmanagerrunresult.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\process.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\process.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\testmanager.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\testmanager.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\unittestclass.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\unittestclass.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\unittestresult.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\unittestresult.png
-		..\OneDrive\文档\微加\单元测试与集成测试\images\xUnitTestCreate.png = ..\OneDrive\文档\微加\单元测试与集成测试\images\xUnitTestCreate.png
+		Images\createintegrationtest.png = Images\createintegrationtest.png
+		Images\integrationmanager.png = Images\integrationmanager.png
+		Images\integrationmanagerrun.png = Images\integrationmanagerrun.png
+		Images\integrationmanagerrunresult.png = Images\integrationmanagerrunresult.png
+		Images\process.png = Images\process.png
+		Images\testmanager.png = Images\testmanager.png
+		Images\unittestclass.png = Images\unittestclass.png
+		Images\unittestresult.png = Images\unittestresult.png
+		Images\xUnitTestCreate.png = Images\xUnitTestCreate.png
 	EndProjectSection
 EndProject
 Global
@@ -323,7 +323,7 @@ Global
 		{BFD2F207-A1B7-4AEA-95AC-4D06F3D02D05} = {26939763-CBE2-4ABD-9032-FC0647391949}
 		{009921A8-C108-476F-A838-231787FDEDE8} = {26939763-CBE2-4ABD-9032-FC0647391949}
 		{26939763-CBE2-4ABD-9032-FC0647391949} = {62F7F5DF-79FA-4EA2-B03E-E1782847C31D}
-		{FA61EF3E-599A-4C72-8946-A46BBB89188D} = {26939763-CBE2-4ABD-9032-FC0647391949}
+		{1CC2FA26-1EB5-4082-BF50-E2F8D188B3FC} = {26939763-CBE2-4ABD-9032-FC0647391949}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B524F8E-74E8-4F79-8A49-4C8CE8E09A2A}
