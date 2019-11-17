@@ -60,6 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{1CC2FA
 		Images\unittestclass.png = Images\unittestclass.png
 		Images\unittestresult.png = Images\unittestresult.png
 		Images\xUnitTestCreate.png = Images\xUnitTestCreate.png
+		..\OneDrive\文档\微加\单元测试与集成测试\单元测试与集成测试.md = ..\OneDrive\文档\微加\单元测试与集成测试\单元测试与集成测试.md
 	EndProjectSection
 EndProject
 Global
